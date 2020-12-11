@@ -28,6 +28,7 @@ else
   php -dmemory_limit=-1 $COMPOSER_PATH install
 fi
 
+composer require drush/drush
 echo "Setup Drush"
 sudo ln -s /opt/drupal/vendor/bin/drush /usr/bin/drush
 phpenv rehash
