@@ -20,7 +20,7 @@ phpcs --config-set installed_paths /opt/utils/vendor/drupal/coder/coder_sniffer
 
 echo "Composer install drupal site"
 cd /opt
-git clone --branch 8.x-1.x https://github.com/Islandora/drupal-project.git drupal
+composer create-project drupal/recommended-project:8.9.11 drupal
 cd drupal
 if [ -z "$COMPOSER_PATH" ]; then
   composer install
@@ -28,6 +28,7 @@ else
   php -dmemory_limit=-1 $COMPOSER_PATH install
 fi
 
+composer require drush/drush
 echo "Setup Drush"
 sudo ln -s /opt/drupal/vendor/bin/drush /usr/bin/drush
 phpenv rehash
