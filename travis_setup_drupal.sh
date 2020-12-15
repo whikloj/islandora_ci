@@ -28,6 +28,7 @@ else
   php -dmemory_limit=-1 $COMPOSER_PATH install
 fi
 
+composer require "drupal/core-dev:^8.9"
 composer require drush/drush
 echo "Setup Drush"
 sudo ln -s /opt/drupal/vendor/bin/drush /usr/bin/drush
