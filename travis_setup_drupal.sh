@@ -19,8 +19,11 @@ phpenv rehash
 phpcs --config-set installed_paths /opt/utils/vendor/drupal/coder/coder_sniffer
 
 echo "Composer install drupal site"
+if [ -z "$DRUPAL_VERSION" ]; then
+    DRUPAL_VERSION=8.9.11
+fi
 cd /opt
-composer create-project drupal/recommended-project:8.9.11 drupal
+composer create-project drupal/recommended-project:$DRUPAL_VERSION drupal
 cd drupal
 if [ -z "$COMPOSER_PATH" ]; then
   composer install
@@ -28,7 +31,8 @@ else
   php -dmemory_limit=-1 $COMPOSER_PATH install
 fi
 
-composer require "drupal/core-dev:^8.9"
+composer require "drupal/core-dev:$DRUPAL_VERSION"
+composer require phpspec/prophecy-phpunit:^2
 composer require drush/drush
 echo "Setup Drush"
 sudo ln -s /opt/drupal/vendor/bin/drush /usr/bin/drush
