@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Setup database for Drupal"
-mysql -u root -e 'create database drupal;'
-mysql -u root -e "GRANT ALL PRIVILEGES ON drupal.* To 'drupal'@'127.0.0.1' IDENTIFIED BY 'drupal';"
+mysql -h 127.0.0.1 -u root -e 'create database drupal;'
+mysql -h 127.0.0.1 -u root -e "GRANT ALL PRIVILEGES ON drupal.* To 'drupal'@'127.0.0.1' IDENTIFIED BY 'drupal';"
 
 echo "Install utilities needed for testing"
 mkdir /opt/utils
