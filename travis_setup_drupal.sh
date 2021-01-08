@@ -1,7 +1,6 @@
 #!/bin/bash
 echo "Setup database for Drupal"
-mysql -u root -e 'create database drupal;'
-mysql -u root -e "GRANT ALL PRIVILEGES ON drupal.* To 'drupal'@'127.0.0.1' IDENTIFIED BY 'drupal';"
+mysql -h 127.0.0.1 -u root -e "GRANT ALL PRIVILEGES ON drupal.* To 'drupal'@'%' IDENTIFIED BY 'drupal';"
 
 echo "Install utilities needed for testing"
 mkdir /opt/utils
@@ -32,7 +31,10 @@ else
 fi
 
 composer require "drupal/core-dev:$DRUPAL_VERSION"
-composer require phpspec/prophecy-phpunit:^2
+DRUPAL_MAJOR=$(echo "$DRUPAL_VERSION" | cut -d. -f1)
+if [ $DRUPAL_MAJOR -ge 9 ]; then
+   composer require phpspec/prophecy-phpunit:^2
+fi
 composer require drush/drush
 echo "Setup Drush"
 sudo ln -s /opt/drupal/vendor/bin/drush /usr/bin/drush
@@ -64,9 +66,3 @@ rm pdfjs-2.0.943-dist.zip
 
 cd ..
 drush -y en pdf
-
-echo "Setup ActiveMQ"
-cd /opt
-wget "http://archive.apache.org/dist/activemq/5.14.3/apache-activemq-5.14.3-bin.tar.gz"
-tar -xzf apache-activemq-5.14.3-bin.tar.gz
-apache-activemq-5.14.3/bin/activemq start

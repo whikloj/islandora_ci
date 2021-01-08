@@ -10,13 +10,13 @@ function checkReturn {
   fi
 }
 
-$SCRIPT_DIR/line_endings.sh $TRAVIS_BUILD_DIR
+$SCRIPT_DIR/line_endings.sh $GITHUB_WORKSPACE/build_dir
 checkReturn $?
 
-phpcs --standard=Drupal --ignore=*.md --extensions=php,module,inc,install,test,profile,theme,css,info $TRAVIS_BUILD_DIR
+phpcs --standard=Drupal --ignore=*.md --extensions=php,module,inc,install,test,profile,theme,css,info $GITHUB_WORKSPACE/build_dir
 checkReturn $?
 
-phpcpd --suffix *.module,*.inc,*.test,*.php $TRAVIS_BUILD_DIR
+phpcpd --suffix *.module,*.inc,*.test,*.php $GITHUB_WORKSPACE/build_dir
 checkReturn $?
 
 exit $OUTPUT
