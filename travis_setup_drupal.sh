@@ -1,6 +1,10 @@
 #!/bin/bash
 echo "Setup database for Drupal"
 mysql -h 127.0.0.1 -u root -e "GRANT ALL PRIVILEGES ON drupal.* To 'drupal'@'127.0.0.1' IDENTIFIED BY 'drupal';"
+mysql -h 127.0.0.1 -u drupal -p drupal -e "SHOW DATABASES"
+if [ $# -ne 0 ]; then
+  exit 1
+fi
 
 echo "Install utilities needed for testing"
 mkdir /opt/utils
