@@ -71,8 +71,8 @@ rm pdfjs-2.0.943-dist.zip
 cd ..
 drush -y en pdf
 
-echo "Setup ActiveMQ"
-cd /opt
-wget "http://archive.apache.org/dist/activemq/5.14.3/apache-activemq-5.14.3-bin.tar.gz"
-tar -xzf apache-activemq-5.14.3-bin.tar.gz
-apache-activemq-5.14.3/bin/activemq start
+#echo "Setup ActiveMQ"
+#cd /opt
+#wget "http://archive.apache.org/dist/activemq/5.14.3/apache-activemq-5.14.3-bin.tar.gz"
+#tar -xzf apache-activemq-5.14.3-bin.tar.gz
+#apache-activemq-5.14.3/bin/activemq start
