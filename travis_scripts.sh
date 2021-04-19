@@ -13,7 +13,7 @@ function checkReturn {
 $SCRIPT_DIR/line_endings.sh $GITHUB_WORKSPACE/build_dir
 checkReturn $?
 
-phpcs --standard=Drupal --ignore=*.md --extensions=php,module,inc,install,test,profile,theme,css,info $GITHUB_WORKSPACE/build_dir
+phpcs --standard=Drupal --ignore=*.md,*-min.css --extensions=php,module,inc,install,test,profile,theme,css,info $GITHUB_WORKSPACE/build_dir
 checkReturn $?
 
 phpcpd --suffix *.module,*.inc,*.test,*.php $GITHUB_WORKSPACE/build_dir
