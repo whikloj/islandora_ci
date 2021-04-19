@@ -16,7 +16,7 @@ checkReturn $?
 phpcs --standard=Drupal --ignore=*.md,*-min.css,*.css --extensions=php,module,inc,install,test,profile,theme,css,info $GITHUB_WORKSPACE/build_dir
 checkReturn $?
 
-phpcs --standard=Drupal $GITHUB_WORKSPACE/build_dir/style/custom.css
+phpcs --standard=Drupal $GITHUB_WORKSPACE/build_dir/styles/css/custom.css
 checkReturn $?
 
 phpcpd --suffix *.theme,*.module,*.inc,*.test,*.php $GITHUB_WORKSPACE/build_dir
