@@ -19,7 +19,8 @@ checkReturn $?
 phpcs --standard=Drupal $GITHUB_WORKSPACE/build_dir/styles/css/custom.css
 checkReturn $?
 
-phpcpd --suffix *.theme,*.module,*.inc,*.test,*.php $GITHUB_WORKSPACE/build_dir
+ls -alh $GITHUB_WORKSPACE/build_dir
+phpcpd --suffix .theme,.module,.inc,.test,.php $GITHUB_WORKSPACE/build_dir
 checkReturn $?
 
 exit $OUTPUT
