@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Setup database for Drupal"
-mysql -h 127.0.0.1 -u root -e "GRANT ALL PRIVILEGES ON drupal.* To 'drupal'@'%' IDENTIFIED BY 'drupal';"
+mysql -h 127.0.0.1 -P 3306 -u root -e "CREATE USER 'drupal'@'%' IDENTIFIED BY 'drupal'; GRANT ALL PRIVILEGES ON drupal.* To 'drupal'@'%'; FLUSH ALL PRIVILEGES;"
 
 echo "Install utilities needed for testing"
 mkdir /opt/utils
@@ -19,7 +19,9 @@ phpcs --config-set installed_paths /opt/utils/vendor/drupal/coder/coder_sniffer
 
 echo "Composer install drupal site"
 if [ -z "$DRUPAL_VERSION" ]; then
-    DRUPAL_VERSION=8.9.11
+   # Just fail if we don't set a version
+   echo "DRUPAL_VERSION is not set, exiting"
+   exit 1
 fi
 cd /opt
 composer create-project drupal/recommended-project:$DRUPAL_VERSION drupal
@@ -42,7 +44,7 @@ phpenv rehash
 
 echo "Drush setup drupal site"
 cd web
-drush si --db-url=mysql://drupal:drupal@127.0.0.1/drupal --yes
+drush si --db-url=mysql://drupal:drupal@127.0.0.1:3306/drupal --yes
 drush runserver 127.0.0.1:8282 &
 until curl -s 127.0.0.1:8282; do true; done > /dev/null
 echo "Enable simpletest module"
@@ -66,3 +68,4 @@ rm pdfjs-2.0.943-dist.zip
 
 cd ..
 drush -y en pdf
+
