@@ -37,7 +37,7 @@ DRUPAL_MAJOR=$(echo "$DRUPAL_VERSION" | cut -d. -f1)
 if [ $DRUPAL_MAJOR -ge 9 ]; then
    composer require phpspec/prophecy-phpunit:^2
 fi
-composer require drush/drush
+composer require drush/drush=~10
 echo "Setup Drush"
 sudo ln -s /opt/drupal/vendor/bin/drush /usr/bin/drush
 phpenv rehash
