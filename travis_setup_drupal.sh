@@ -6,10 +6,10 @@ echo "Install utilities needed for testing"
 mkdir /opt/utils
 cd /opt/utils
 if [ -z "$COMPOSER_PATH" ]; then
-  composer require drupal/coder ^8.3.11
+  composer require drupal/coder 8.3.13 # 8.3.14 breaks, see https://www.drupal.org/project/coder/issues/3262291 
   composer require sebastian/phpcpd ^6
 else
-  php -dmemory_limit=-1 $COMPOSER_PATH require drupal/coder ^8.3.11
+  php -dmemory_limit=-1 $COMPOSER_PATH require drupal/coder 8.3.13 # 8.3.14 breaks, see https://www.drupal.org/project/coder/issues/3262291 
   php -dmemory_limit=-1 $COMPOSER_PATH require sebastian/phpcpd ^6
 fi
 sudo ln -s /opt/utils/vendor/bin/phpcs /usr/bin/phpcs
